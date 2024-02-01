@@ -1,0 +1,746 @@
+﻿@page "/"
+
+@using BlazorApp.Client.Component
+@using BlazorApp.Client.Services.ClassesService
+
+@inject IJSRuntime JS
+@inject NavigationManager Navigation;
+@inject IClassesService ClassService
+
+
+<PageTitle>Index</PageTitle>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex justify-content-center align-items-center header-transparent">
+
+    <nav id="navbar" class="navbar @NavMenuCssClass">
+        <ul>
+            <!-- https://www.meziantou.net/anchor-navigation-in-a-blazor-application.htm -->
+            <li>
+                <NavLink href="/" Match="NavLinkMatch.All">Home</NavLink>
+            </li>
+            <li>
+                <NavLink href="/#about" Match="NavLinkMatch.All">About</NavLink>
+            </li>
+            <li>
+                <NavLink href="/#resume" Match="NavLinkMatch.All">Resume</NavLink>
+            </li>
+            <li>
+                <NavLink href="/#testimonials" Match="NavLinkMatch.All">Testimonials</NavLink>
+            </li>
+            <li>
+                <NavLink href="/#portfolio" Match="NavLinkMatch.All">Portfolio</NavLink>
+            </li>
+            <li>
+                <NavLink href="/#contact" Match="NavLinkMatch.All">Contact</NavLink>
+            </li>
+            <li class="dropdown">
+                <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a href="#">Drop Down 1</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                        <ul>
+                            <li><a href="#">Deep Drop Down 1</a></li>
+                            <li><a href="#">Deep Drop Down 2</a></li>
+                            <li><a href="#">Deep Drop Down 3</a></li>
+                            <li><a href="#">Deep Drop Down 4</a></li>
+                            <li><a href="#">Deep Drop Down 5</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Drop Down 2</a></li>
+                    <li><a href="#">Drop Down 3</a></li>
+                    <li><a href="#">Drop Down 4</a></li>
+                </ul>
+            </li>
+            
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle" @onclick="ToggleNavMenu"></i>
+    </nav><!-- .navbar -->
+
+</header><!-- End Header -->
+
+<AnchorNavigation />
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+        <h1>David Bailey</h1>
+        <h2>I'm a Professional Photographer In The UK</h2>
+        <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
+    </div>
+</section><!-- End Hero -->
+
+<!-- ======= About Me Section ======= -->
+<section id="about" class="about">
+    <div class="container">
+
+        <div class="section-title">
+            <span>About Me</span>
+            <h2>About Me</h2>
+            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <div class="row">
+            <div class="image col-lg-4 d-flex align-items-stretch justify-content-center justify-content-lg-start"></div>
+            <div class="col-lg-8 d-flex flex-column align-items-stretch">
+                <div class="content ps-lg-4 d-flex flex-column justify-content-center">
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <p>
+                                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mt-n4">
+                        <div class="col-md-6 mt-5 d-md-flex align-items-md-stretch">
+                            <div class="count-box">
+                                <i class="bi bi-emoji-smile" style="color: #20b38e;"></i>
+                                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                                <p><strong>Happy Clients</strong> consequuntur voluptas nostrum aliquid ipsam architecto ut.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mt-5 d-md-flex align-items-md-stretch">
+                            <div class="count-box">
+                                <i class="bi bi-sd-card" style="color: #8a1ac2;"></i>
+                                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                                <p><strong>Projects</strong> adipisci atque cum quia aspernatur totam laudantium et quia dere tan</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mt-5 d-md-flex align-items-md-stretch">
+                            <div class="count-box">
+                                <i class="bi bi-clock" style="color: #2cbdee;"></i>
+                                <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
+                                <p><strong>Years of experience</strong> aut commodi quaerat modi aliquam nam ducimus aut voluptate non vel</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mt-5 d-md-flex align-items-md-stretch">
+                            <div class="count-box">
+                                <i class="bi bi-award" style="color: #ffb459;"></i>
+                                <span data-purecounter-start="0" data-purecounter-end="16" data-purecounter-duration="1" class="purecounter"></span>
+                                <p><strong>Awards</strong> rerum asperiores dolor alias quo reprehenderit eum et nemo pad der</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End .content-->
+            </div>
+        </div>
+    </div>
+</section><!-- End About Me Section -->
+
+    <!-- ======= My Resume Section ======= -->
+    <section id="resume" class="resume">
+      <div class="container">
+
+        <div class="section-title">
+          <span>My Resume</span>
+          <h2>My Resume</h2>
+          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="resume-title">Sumary</h3>
+                <div class="resume-item pb-0">
+                    <h4>David Bailey</h4>
+                    <p><em>English photographer and director, most widely known for fashion photography and portraiture, and role in shaping the image of the Swinging Sixties.</em></p>
+                    <p>
+                        <ul>
+                            <li>Bournemouth, UK</li>
+                            <li>(+44) 1111111</li>
+                        </ul>
+                    </p>
+                </div>
+
+                <h3 class="resume-title">Education</h3>
+                <div class="resume-item">
+                    <h4>Master of Digital Arts &amp; Composition</h4>
+                    <h5>2015 - 2016</h5>
+                    <p><em>Bournemouth Polytechnic, Dorset, UK</em></p>
+                    <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
+                </div>
+                <div class="resume-item">
+                    <h4>Master of Digital Arts &amp; Composition</h4>
+                    <h5>2015 - 2016</h5>
+                    <p><em>Bournemouth Polytechnic, Dorset, UK</em></p>
+                    <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
+                </div>
+            </div>
+          <div class="col-lg-6">
+            <h3 class="resume-title">Professional Experience</h3>
+            <div class="resume-item">
+              <h4>Lead Digital Artist</h4>
+              <h5>2019 - Present</h5>
+              <p><em>Digital Agency, Dorset, UK</em></p>
+              <p>
+              <ul>
+                  <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend.</li>
+                  <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend. </li>
+                  <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend.</li>
+                  <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend.</li>
+              </ul>
+              </p>
+            </div>
+            <div class="resume-item">
+              <h4>Junior Digital Specialist</h4>
+              <h5>2017 - 2018</h5>
+              <p><em>Digital Agency, Dorset, UK</em></p>
+              <p>
+                  <ul>
+                      <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend.</li>
+                      <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend. </li>
+                      <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend.</li>
+                      <li>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend.</li>
+                  </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End My Resume Section -->
+
+    <!-- ======= My Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <span>My Services</span>
+          <h2>My Services</h2>
+          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4 class="title"><a href="">Magni Dolores</a></h4>
+              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4 class="title"><a href="">Nemo Enim</a></h4>
+              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End My Services Section -->
+
+<!-- ======= Testimonials Section ======= -->
+<section id="testimonials" class="testimonials">
+    <div class="container position-relative">
+
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            @*  <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div> *@
+            <div class="carousel-inner">
+                <div class="carousel-item testimonial-item active">
+                    <div class="testimonial-item">
+                        <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                        <h3>Polly</h3>
+                        <h4>Artist</h4>
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="carousel-item testimonial-item">
+                    <div class="testimonial-item">
+                        <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                        <h3>Emma</h3>
+                        <h4>Writer</h4>
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="carousel-item testimonial-item">
+                    <div class="testimonial-item">
+                        <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                        <h3>Dave</h3>
+                        <h4>Blogger</h4>
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                    </div>
+                </div>
+
+              
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="bottom:unset">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="bottom:unset">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+<!-- End Testimonials Section -->
+
+    <!-- ======= My Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <span>My Portfolio</span>
+          <h2>My Portfolio</h2>
+          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <ul id="portfolio-flters" class="d-flex justify-content-center">
+          <li class="filter-active">All</li>
+          <li>Nature</li>
+          <li>Life</li>
+          <li>Abstract</li>
+        </ul>
+
+        <div class="row portfolio-container">
+            <ImageLinkComponent ></ImageLinkComponent>
+        </div>
+
+      </div>
+    </section><!-- End My Portfolio Section -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+
+        <div class="section-title">
+          <span>Pricing</span>
+          <h2>Pricing</h2>
+          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="box">
+              <h3>Free</h3>
+              <h4><sup>$</sup>0<span> / month</span></h4>
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li class="na">Pharetra massa</li>
+                <li class="na">Massa ultricies mi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Buy Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+            <div class="box featured">
+              <h3>Business</h3>
+              <h4><sup>$</sup>19<span> / month</span></h4>
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li class="na">Massa ultricies mi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Buy Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <h3>Developer</h3>
+              <h4><sup>$</sup>29<span> / month</span></h4>
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li>Massa ultricies mi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Buy Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <span class="advanced">Advanced</span>
+              <h3>Ultimate</h3>
+              <h4><sup>$</sup>49<span> / month</span></h4>
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li>Massa ultricies mi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Buy Now</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+    <!-- ======= Contact Me Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <span>Contact Me</span>
+          <h2>Contact Me</h2>
+          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <i class="bx bx-share-alt"></i>
+                  <h3>Social Profiles</h3>
+                  <div class="social-links">
+                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email Me</h3>
+                  <p>contact@example.com</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Call Me</h3>
+                  <p>+44 111 111111</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+            <form action="" method="dialog" role="form" class="email-form">
+            
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center">
+                  <button @onclick="SendMail">Send Message</button>
+              </div>
+                </form>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Contact Me Section -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="container">
+        <h3>David Bailey</h3>
+        <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+        <div class="social-links">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; Copyright <strong><span>David Bailey</span></strong>. All Rights Reserved
+        </div>
+    </div>
+</footer><!-- End Footer -->
+
+<a id="back-to-top" href="#" class="back-to-top d-flex align-items-center justify-content-center @BackToTopMenuCssClassActive"><i class="bi bi-arrow-up-short"></i></a>
+
+@code {
+
+    private IJSObjectReference? _jsModule;
+
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? null : "navbar-mobile";
+    private string @CloseMenuCssClass => collapseNavMenu ? "d-none" : "d-flex";
+
+
+
+    private bool homeMenuActive = true;
+    private bool aboutMenuActive = false;
+    private bool classesMenuActive = false;
+    private bool contactMenuActive = false;
+    private bool testimonialMenuActive = false;
+    private bool resumeMenuActive = false;
+    private string? HomeMenuCssClassActive => homeMenuActive ? "active" : null;
+    private string? AboutMenuCssClassActive => aboutMenuActive ? "active" : null;
+    private string? ClassesMenuCssClassActive => classesMenuActive ? "active" : null;
+    private string? ContactMenuCssClassActive => contactMenuActive ? "active" : null;
+    private string? TestimomialMenuCssClassActive => testimonialMenuActive ? "active" : null;
+    private string? ResumeMenuCssClassActive => resumeMenuActive ? "active" : null;
+
+    private bool backToTopActive = false;
+    private string? BackToTopMenuCssClassActive => backToTopActive ? "active" : null;
+
+    private int counter;
+
+    private bool scrolledToContact = false; //todo: must be a better way?!
+    private bool scrolledToAbout = false; //todo: must be a better way?!
+    private bool scrolledToClasses = false;
+
+
+    ElementReference navResume, navAbout;
+
+    protected override void OnInitialized()
+    {
+        ClassService.FirstPageDisplayClassesChanged += StateHasChanged;       
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        CloseNavMenu();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Navigation.LocationChanged -= OnLocationChanged;
+        Navigation.LocationChanged += OnLocationChanged;
+
+
+        _jsModule = await JS.InvokeAsync<IJSObjectReference>("import", "../assets/js/blazor-template-main.js");
+
+        if (_jsModule != null)
+        {
+            AttachScrollListener();
+        }
+
+        // try
+        // {
+        //     await ClassService.GetClasses();
+        // }
+        // catch (Exception ex)
+        // {
+        //     Console.WriteLine(ex.ToString());
+        // }
+
+    }
+
+    private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        //await _jsModule.InvokeVoidAsync("showAlert", e.Location);
+        collapseNavMenu = true;
+
+        // if (e.Location.Contains("contact"))
+        // {
+
+        //     if (!scrolledToContact)
+        //     {
+
+        //         await _jsModule.InvokeVoidAsync("scrollToContact");
+        //         scrolledToContact = true;
+        //     }
+        // }
+        // if (e.Location.Contains("classes"))
+        // {
+
+        //     if (!scrolledToClasses)
+        //     {
+
+        //         await _jsModule.InvokeVoidAsync("scrollToClasses");
+        //         scrolledToClasses = true;
+        //     }
+        // }
+        // if (e.Location.Contains("about"))
+        // {
+
+        //     if (!scrolledToAbout)
+        //     {
+
+        //         await _jsModule.InvokeVoidAsync("scrollToAbout");
+        //         scrolledToAbout = true;
+        //     }
+        // }
+
+        StateHasChanged();
+
+    }
+
+    async Task AttachScrollListener()
+    {
+        //selfReference = DotNetObjectReference.Create(this);
+        var minInterval = 500; // Only notify every 500 ms
+        await _jsModule.InvokeVoidAsync("onPageScroll", minInterval);
+    }
+
+    private async Task SendMail()
+    {
+        //stub mail method  
+        await _jsModule.InvokeVoidAsync("alert", "Sending Mail!"); // Alert
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void CloseNavMenu()
+    {
+        // if (collapseNavMenu == false)
+            collapseNavMenu = true;
+    }
+
+    private void ScrollToAndCloseNavMenu(string target, ElementReference el)
+    {
+        _jsModule.InvokeVoidAsync("scrollTo",target);
+
+        
+        //handle active class addition for menu items - can't use navlink
+        //todo
+        homeMenuActive = false;
+        aboutMenuActive = false;
+        classesMenuActive = false;
+        contactMenuActive = false;
+        testimonialMenuActive = false;
+        resumeMenuActive = false;
+       
+        
+        switch (target)
+        {
+            case "resume":
+                resumeMenuActive = true;
+                break;
+            case "about":
+                aboutMenuActive = true;
+                break;
+            case "testimonials":
+                testimonialMenuActive = true;
+                break;
+        }
+
+
+        CloseNavMenu();
+    }
+
+    private void ScrollToAboutAndCloseNamMenu()
+    {
+        _jsModule.InvokeVoidAsync("scrollToAbout");
+
+        homeMenuActive = false;
+        classesMenuActive = false;
+        contactMenuActive = false;
+        aboutMenuActive = true;
+
+        CloseNavMenu();
+    }
+
+    private void ScrollToClassesAndCloseNamMenu()
+    {
+        _jsModule.InvokeVoidAsync("scrollToClasses");
+
+        homeMenuActive = false;
+        contactMenuActive = false;
+        classesMenuActive = true;
+        aboutMenuActive = false;
+
+        CloseNavMenu();
+    }
+
+    private void ScrollToContactAndCloseNamMenu()
+    {
+        _jsModule.InvokeVoidAsync("scrollToContact");
+
+        homeMenuActive = false;
+        aboutMenuActive = false;
+        contactMenuActive = true;
+        classesMenuActive = false;
+
+        CloseNavMenu();
+    }
+
+    private void HandleHomeClick()
+    {
+
+        homeMenuActive = true;
+        aboutMenuActive = false;
+        contactMenuActive = false;
+        classesMenuActive = false;
+        
+        CloseNavMenu();
+    }
+
+
+    private void OnScroll()
+    {
+        counter++;
+    }
+
+}
