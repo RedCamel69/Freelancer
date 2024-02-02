@@ -10,54 +10,38 @@
 
 <PageTitle>Index</PageTitle>
 
+<BlazorBody CssClass="@bodyClass"></BlazorBody>
+
+<!-- ======= Mobile nav toggle button ======= -->
+<i class="bi bi-list mobile-nav-toggle d-xl-none" @onclick="HandleMobileNavToggle"></i>
+
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top d-flex justify-content-center align-items-center header-transparent">
+<header id="header">
+    <div class="d-flex flex-column">
 
-    <nav id="navbar" class="navbar @NavMenuCssClass">
-        <ul>
-            <!-- https://www.meziantou.net/anchor-navigation-in-a-blazor-application.htm -->
-            <li>
-                <NavLink href="/" Match="NavLinkMatch.All">Home</NavLink>
-            </li>
-            <li>
-                <NavLink href="/#about" Match="NavLinkMatch.All">About</NavLink>
-            </li>
-            <li>
-                <NavLink href="/#resume" Match="NavLinkMatch.All">Resume</NavLink>
-            </li>
-            <li>
-                <NavLink href="/#testimonials" Match="NavLinkMatch.All">Testimonials</NavLink>
-            </li>
-            <li>
-                <NavLink href="/#portfolio" Match="NavLinkMatch.All">Portfolio</NavLink>
-            </li>
-            <li>
-                <NavLink href="/#contact" Match="NavLinkMatch.All">Contact</NavLink>
-            </li>
-            <li class="dropdown">
-                <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                    <li><a href="#">Drop Down 1</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                        <ul>
-                            <li><a href="#">Deep Drop Down 1</a></li>
-                            <li><a href="#">Deep Drop Down 2</a></li>
-                            <li><a href="#">Deep Drop Down 3</a></li>
-                            <li><a href="#">Deep Drop Down 4</a></li>
-                            <li><a href="#">Deep Drop Down 5</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Drop Down 2</a></li>
-                    <li><a href="#">Drop Down 3</a></li>
-                    <li><a href="#">Drop Down 4</a></li>
-                </ul>
-            </li>
-            
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle" @onclick="ToggleNavMenu"></i>
-    </nav><!-- .navbar -->
+        <div class="profile">
+            <img src="assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
+            <h1 class="text-light"><a href="index.html">Alex Smith</a></h1>
+            <div class="social-links mt-3 text-center">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
 
+        <nav id="navbar" class="nav-menu navbar">
+            <ul>
+                <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+                <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+                <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
+                <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+                <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
+                <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+    </div>
 </header><!-- End Header -->
 
 <AnchorNavigation />
@@ -66,8 +50,9 @@
 <section id="hero">
     <div class="hero-container">
         <h1>David Bailey</h1>
-        <h2>I'm a Professional Photographer In The UK</h2>
+        <h2>I'm a  <BlazorTyped Words="skills"></BlazorTyped> in South Wiltshire</h2>
         <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
+       
     </div>
 </section><!-- End Hero -->
 
@@ -524,11 +509,21 @@
 
 <a id="back-to-top" href="#" class="back-to-top d-flex align-items-center justify-content-center @BackToTopMenuCssClassActive"><i class="bi bi-arrow-up-short"></i></a>
 
+
+
 @code {
+
+    private List<string> skills = new List<string> { "web developer", "web hoster", "Microsoft developer" };
 
     private IJSObjectReference? _jsModule;
 
     private bool collapseNavMenu = true;
+
+
+    private bool mobileNavActive = false;
+    private string? bodyClass => mobileNavActive ? "mobile-nav-active" : String.Empty;
+
+
 
     private string? NavMenuCssClass => collapseNavMenu ? null : "navbar-mobile";
     private string @CloseMenuCssClass => collapseNavMenu ? "d-none" : "d-flex";
@@ -551,6 +546,8 @@
     private bool backToTopActive = false;
     private string? BackToTopMenuCssClassActive => backToTopActive ? "active" : null;
 
+
+
     private int counter;
 
     private bool scrolledToContact = false; //todo: must be a better way?!
@@ -559,6 +556,9 @@
 
 
     ElementReference navResume, navAbout;
+
+
+
 
     protected override void OnInitialized()
     {
@@ -655,14 +655,14 @@
     private void CloseNavMenu()
     {
         // if (collapseNavMenu == false)
-            collapseNavMenu = true;
+        collapseNavMenu = true;
     }
 
     private void ScrollToAndCloseNavMenu(string target, ElementReference el)
     {
         _jsModule.InvokeVoidAsync("scrollTo",target);
 
-        
+
         //handle active class addition for menu items - can't use navlink
         //todo
         homeMenuActive = false;
@@ -671,8 +671,8 @@
         contactMenuActive = false;
         testimonialMenuActive = false;
         resumeMenuActive = false;
-       
-        
+
+
         switch (target)
         {
             case "resume":
@@ -733,7 +733,7 @@
         aboutMenuActive = false;
         contactMenuActive = false;
         classesMenuActive = false;
-        
+
         CloseNavMenu();
     }
 
@@ -741,6 +741,12 @@
     private void OnScroll()
     {
         counter++;
+    }
+
+
+    private void HandleMobileNavToggle()
+    {
+        mobileNavActive = !mobileNavActive;
     }
 
 }

@@ -1,0 +1,56 @@
+﻿ @message
+
+
+
+@code {
+
+    [Parameter]
+    public List<string> Words { get; set; }
+
+    public string message;
+
+    protected override void OnInitialized()
+    {
+        Generate();
+    }
+
+    private async Task Generate()
+    {
+        try
+        {
+            for (int x = 0; x < 10; x++)
+            {
+                Console.WriteLine(x);
+                foreach (string word in Words)
+                {
+                    await ProcessWord(word);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task ProcessWord(string word)
+    {
+        // Animate the word being typed out
+        for (int i = 0; i <= word.Length; i++)
+        {
+            await Task.Delay(100);
+            message = word.Substring(0, i) + "|";
+            Console.WriteLine(message);
+            StateHasChanged();
+            await Task.Delay(100);
+        }
+
+        // Animate the word being erased
+        for (int i = word.Length; i > 0; i--)
+        {
+            await Task.Delay(100);
+            message = word.Substring(0, i) + "|";
+            StateHasChanged();
+        }
+    }
+}

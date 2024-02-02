@@ -1,44 +1,3 @@
-
-export function scrollTo(target) {
-
-    try {
-        document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-export function scrollToAbout() {
-
-    try {
-        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-
-export function scrollToClasses() {
-
-    try {
-        document.getElementById('classes').scrollIntoView({ behavior: 'smooth' });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-
-export function scrollToContact() {
-
-    try {
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-
-
 export function onPageScroll(interval) {
     let selectHeader = document.getElementById('header');
     let selectBackToTop = document.getElementById('back-to-top');
@@ -54,14 +13,4 @@ export function onPageScroll(interval) {
             }
         }
     }, interval);
-}
-
-export function alert(msg) {
-
-    try {
-        alert(msg);
-    }
-    catch (err) {
-        console.log(err);
-    }
 }
